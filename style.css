@@ -54,3 +54,18 @@ img {
     margin: 3px 0;
     height: 57px;
 }
+
+.player{
+    border: 2px solid red;
+    width: 50%;
+}
+
+.bot {
+    border: 2px solid purple;
+    width: 50%;
+}
+
+.scores {
+    display: flex;
+    justify-content: space-evenly;
+}

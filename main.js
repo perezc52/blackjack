@@ -1,6 +1,7 @@
 //Global variables for deck id and score
 let deckid;
 let score = 0;
+let botScore = 0;
 
 //Getting a new shuffled deck and retrieving its id
 fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
@@ -15,6 +16,7 @@ fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
 document.querySelector('.newGame').addEventListener('click', function(){
     reset();
     drawCard();
+    botDraw();
     console.log(score);
     
 });
@@ -22,19 +24,31 @@ document.querySelector('.newGame').addEventListener('click', function(){
 //HIT ME EVENT LISTENER
 document.querySelector('.hitMe').addEventListener('click', function() {
     drawCard();
+    botDraw();
+    checkWin();
 })
 
 //STOP EVENT LISTENER
 document.querySelector('.stop').addEventListener('click', function(){
-
+    checkWin();
 })
 
+
+//FUNCTIONS
 function reset() {
     let cards = document.querySelector(".cards");
     while (cards.firstChild) {
         cards.removeChild(cards.firstChild);
     }
     score = 0;
+    botScore = 0;
+}
+
+function botDraw(){
+    let num;
+    num = Math.floor(Math.random() * 10) + 1;
+    botScore += num;
+    document.querySelector('.bot .score').innerText = botScore;
 }
 
 function drawCard() {
@@ -62,6 +76,10 @@ function drawCard() {
         score += Number(cardValue);
 
         //display score to the screen
-        document.querySelector('.score').innerText = score;
+        document.querySelector('.player .score').innerText = score;
     })
+}
+
+function checkWin() {
+
 }
